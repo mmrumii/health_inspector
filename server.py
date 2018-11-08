@@ -16,12 +16,13 @@ session = DBSession()
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Secret_key'
 
-
+'''
 #################Login################
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 ######################################
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -69,13 +70,21 @@ def dashboard():
 def logout():
     logout_user()
     return redirect(url_for('login'))
-
+'''
 
 
 @app.route('/')
 @app.route('/home')
 def home():
     return render_template('index.html')
+
+@app.route('/about')
+def about():
+    return render_template('about_us.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
 
 
 if __name__ == '__main__':
