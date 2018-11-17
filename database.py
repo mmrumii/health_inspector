@@ -14,10 +14,12 @@ class User(UserMixin, Base):
     id = Column(Integer, primary_key=True)
     firstname = Column(String(50), nullable = False)
     lastname = Column(String(50), nullable=False)
+    user_type = Column(String(10), nullable=False)
     email = Column(String(80), unique=False)
     username = Column(String(50), unique=True)
     phone = Column(String(50), unique=True)
     password = Column(String(80), nullable=False)
+
 
 
 #Always stay at the end of the file

@@ -1,7 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect,url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-
+from forms import *
 #Connecting to the database and ORM as known sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -16,7 +16,7 @@ session = DBSession()
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Secret_key'
 
-'''
+
 #################Login################
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -51,11 +51,11 @@ def signup():
 
     if form.validate_on_submit():
         hashed_password = generate_password_hash(form.password.data, method='sha256')
-        newUser = User(firstname=form.firstname.data, lastname=form.lastname.data, phone=form.phone.data, email=form.email.data, username=form.username.data, password=hashed_password)
+        newUser = User(firstname=form.firstname.data, lastname=form.lastname.data, user_type = form.user_type.data, phone=form.phone.data, email=form.email.data, username=form.username.data, password=hashed_password)
         session.add(newUser)
         session.commit()
-        return '<h1>Done</h1>'
-    return render_template('signup.html', form=form)
+        return '{} >> {}'.format(form.firstname.data)
+    return render_template('register.html', form=form)
 
 
 @app.route('/dashboard')
@@ -70,7 +70,7 @@ def dashboard():
 def logout():
     logout_user()
     return redirect(url_for('login'))
-'''
+
 
 
 @app.route('/')
