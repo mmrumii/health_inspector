@@ -22,7 +22,7 @@ class User(UserMixin, Base):
 
 
 
-#Always stay at the end of the file
+#Always stay at the back of the file 
 engine = create_engine('sqlite:///health.db')
 Base.metadata.create_all(engine)
 
