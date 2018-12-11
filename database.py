@@ -8,21 +8,21 @@ from flask_login import UserMixin
 
 Base = declarative_base()
 
-class User(UserMixin, Base):
-    __tablename__ = 'user'
 
-    id = Column(Integer, primary_key=True)
-    firstname = Column(String(50), nullable = False)
-    lastname = Column(String(50), nullable=False)
-    user_type = Column(String(10), nullable=False)
-    email = Column(String(80), unique=False)
-    username = Column(String(50), unique=True)
-    phone = Column(String(50), unique=True)
-    password = Column(String(80), nullable=False)
+class Users(UserMixin, Base):
+    __tablename__ = 'Users'
 
+    UserIDNumber = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
+    FullName = Column(String(50), nullable=False)
+    UserType = Column(String(10), nullable=False)
+    EmailAddress = Column(String(80), unique=False)
+    Username = Column(String(50), unique=True)
+    Password = Column(String(80), nullable=False)
 
+    def get_id(self):
+        return self.UserIDNumber
 
-#Always stay at the back of the file 
+#Always stay at the end of the file
 engine = create_engine('sqlite:///health.db')
 Base.metadata.create_all(engine)
 
