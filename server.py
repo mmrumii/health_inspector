@@ -6,6 +6,7 @@ from flask_wtf import FlaskForm
 from flask_bootstrap import Bootstrap
 from wtforms.validators import InputRequired, Email, Length
 from forms import *
+from other_forms import *
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret_key'
@@ -16,7 +17,7 @@ from sqlalchemy import create_engine, func
 from sqlalchemy.orm import sessionmaker, scoped_session
 from database_setup import *
 
-engine = create_engine('sqlite:///classroom.db')
+engine = create_engine('sqlite:///health.db')
 Base.metadata.bind = engine
 #Creates the session
 
@@ -59,7 +60,7 @@ def reset_password():
     return 'password reset page'
 
 
-# Registration System
+# User Registration System
 @app.route('/register',  methods=['GET','POST'])
 def register():
 
@@ -79,10 +80,9 @@ def register():
 
 
 
-# Login System
+# User Login System
 @app.route('/login', methods=['GET','POST'])
 def login():
-
     if current_user.is_authenticated:
         return redirect(url_for('dashboard'))
 
@@ -109,12 +109,13 @@ def dashboard():
         return render_template('s_provider_dashboard.html')
     else: return redirect(url_for('home'))
 
-
+# Needs to commit
 # HOMEPAGE
-@app.route('/')
+@app.route('/', methods=['GET','POST'])
 def home():
-    form = SearchForm()
-
+    form = SearchForm(request.form)
+    if request.method == 'POST' and form.validate():
+        return render_template('search_result.html')
     return render_template('index.html', form = form)
 
 @app.route('/')
@@ -127,38 +128,33 @@ def contact():
     return render_template('contact.html')
 
 
-
-'''
-Teacher's Functionalities
-Classroom, Exam, Assignment management
-'''
-
-
 def is_s_provider(current_user):
     if current_user.UserType == 'S_provider':
         return True
     else: return False
 
-'''
-# Create New University
+
+# Needs to commit
+
 @app.route('/new_service', methods=['GET','POST'])
 @login_required
 def new_service():
-    service_form = ServiceForm()
-    if service_form.validate_on_submit():
-        #university = University(UniName = university_form.Name.data, WikiLink=university_form.WikiLink.data, Location=university_form.Location.data, LocationLink=university_form.LocationLink.data, WebsiteLink=university_form.WebsiteLink.data, Establishment=university_form.Establishment.data, Type=university_form.Type.data, StudentQuantity=university_form.StudentQuantity.data, Ranking=university_form.Ranking.data, Climate=university_form.Climate.data, LivingCost=university_form.LivingCost.data, CurrencyName=university_form.CurrencyName.data, StudentFacultyRatio=university_form.StudentFacultyRatio.data, ApplicationMedium=university_form.ApplicationMedium.data, CountryName=university_form.CountryName.data)
-        #session.add(university)
-        #session.commit()
-        #return redirect(url_for('universities'))
-        return "validated"
-    return render_template('new_service.html',form=service_form)
-'''
+    if is_s_provider(current_user):
+        form = ServiceForm(request.form)
+        if request.method == 'POST' and form.validate():
+            serv = Service(ServiceName=form.ServiceName.data, Location=form.Location.data, DetailsLocation=form.DetailsLocation.data, HospitalName=form.HospitalName.data, Price=form.Price.data, Phone=form.Phone.data)
+            session.add(serv)
+            session.commit()
+            flash('Service Successfully added!')
+            return redirect(url_for('dashboard'))
+        else:
+            return render_template('new_service.html',form=form)
+    else:
+        return redirect(url_for('home'))
 
 
 
-
-
-    #============================
+#============================
 # Main Function
 if __name__ == '__main__':
     app.jinja_env.auto_reload = True
