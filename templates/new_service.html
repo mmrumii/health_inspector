@@ -1,57 +1,52 @@
+
+{% from "_formhelpers.html" import render_field %}
 {% extends 'base.html' %}
 {% block content %}
 <section class="py-5">
     <div class="container py-5">
         <div class="row">
-            <div class="col-12">
+          <div class="col-3"></div>
+            <div class="col-6">
                 <h2>Create new Service</h2>
-                <p class="small col-6">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley</p>
+                <p class="small">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley</p>
 
                 <form action="{{url_for('new_service')}}" method="POST">
+                  <div class="form-group row">
+                    <label for="example-text-input" class="col-2 col-form-label">Service Name</label>
+                      <div class="col-10">
+                        {{ form.ServiceName(class="form-control") }}
+                      </div>
+                    </div>
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-2 col-form-label">Service Name</label>
-                        <div class="col-sm-10">
-                          {{form.ServiceName(class='col-4')}}
+                      <label for="example-text-input" class="col-2 col-form-label">Location</label>
+                        <div class="col-10">
+                          {{ form.Location(class="form-control") }}
                         </div>
                       </div>
-                    <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-2 col-form-label">Location</label>
-                        <div class="col-sm-10">
-                          {{form.Location(class='col-4')}}
+                      <div class="form-group">
+                        <label for="exampleTextarea">Location details</label>
+                        {{ form.DetailsLocation(class="form-control") }}
+                      </div>
+                      <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">Hospital Name</label>
+                        <div class="col-10">
+                          {{ form.HospitalName(class="form-control") }}
                         </div>
                       </div>
-                    <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-2 col-form-label">Details Location</label>
-                        <div class="col-sm-10">
-                          {{form.DetailsLocation(class='col-4')}}
+                      <div class="form-group row">
+                        <label for="example-number-input" class="col-2 col-form-label">Price</label>
+                        <div class="col-10">
+                          {{ form.Price(class="form-control") }}
                         </div>
                       </div>
-                    <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-2 col-form-label">Hospital Name</label>
-                        <div class="col-sm-10">
-                          {{form.HospitalName(class='col-4')}}
+                      <div class="form-group row">
+                        <label for="example-tel-input" class="col-2 col-form-label">Phone</label>
+                        <div class="col-10">
+                          {{ form.Phone(class="form-control") }}
                         </div>
                       </div>
-                    <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-2 col-form-label">Price</label>
-                        <div class="col-sm-10">
-                          {{form.Price(class='col-4')}}
-                        </div>
-                      </div>
-                    <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-2 col-form-label">Phone Number</label>
-                        <div class="col-sm-10">
-                          {{form.Phone(class='col-4')}}
-                        </div>
-                      </div>
-                    <div class="form-group row">
-                        <div class="col-sm-10">
-                          {{form.Submit}}
-                        </div>
-                      </div>
+                      {{ form.Submit(class="btn btn-primary") }}
                 </form>
-
-
             </div>
         </div>
     </div>
