@@ -1,8 +1,5 @@
-# Zohabul
-
 from flask_wtf import FlaskForm
 from wtforms import Form, StringField, validators, PasswordField, BooleanField, DateField, SelectField, IntegerField, FloatField, SubmitField,TextAreaField
-
 
 
 class ServiceForm(Form):
