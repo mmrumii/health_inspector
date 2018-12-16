@@ -36,7 +36,13 @@ class Service(Base):
     Phone = Column(String(20), nullable=True)
 
 
+class Comment(Base):
+    __tablename__ = 'Comment'
 
+    CommentID = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
+    CommentText = Column(String(500), nullable=False)
+    UserIDNumber = ForeignKey(Integer, Users.UserIDNumber)
+    Users = relationship(Users)
 
 
 #Always stay at the end of the file
