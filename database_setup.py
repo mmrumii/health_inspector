@@ -39,7 +39,7 @@ class Comment(Base):
 
     CommentID = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
     CommentText = Column(String(500), nullable=False)
-    UserIDNumber = ForeignKey(Integer, Users.UserIDNumber)
+    UserIDNumber = Column(Integer,ForeignKey(Users.UserIDNumber))
     Users = relationship(Users)
 
 
