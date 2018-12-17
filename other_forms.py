@@ -38,4 +38,3 @@ class SearchForm(Form):
 class CommentForm(Form):
     comment_text = TextAreaField("Comment", [validators.DataRequired()], render_kw={"placeholder": "Type your comment here"} )
     Submit = SubmitField("Create")
-
