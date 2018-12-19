@@ -31,14 +31,16 @@ When user search a service, the website provides results based on
 
 <p>After installing all the dependencies , open the terminal go to the project directory</p>
 
-<p>e.g:</p><code>cd Desktop/health_inspector</code>
+<p>e.g:</p>
 
-Then, run the server.py using python
+<code>cd Desktop/health_inspector</code>
+
+<p>Then, run the server.py using python</p>
 
 <code>python server.py</code>
 
-If the script run correctly, go to browser and visit 
+<p>If the script run correctly, go to browser and visit </p>
 
-localhost:5000
+<a href="localhost:5000">localhost:5000</a>
 
 Now you would be able to browse the website on your browser.
