@@ -16,3 +16,8 @@ class SearchForm(Form):
     location = SelectField("", [validators.DataRequired()], choices=[('Bashundhara','Bashundhara'),('Uttara','Uttara')])
     service = SelectField("", [validators.DataRequired()], choices=[('MRI','MRI'),('X-Ray','X-Ray')])
     Submit = SubmitField("Search")
+
+
+class CommentForm(Form):
+    comment_text = TextAreaField("Comment", [validators.DataRequired()], render_kw={"placeholder": "Type your comment here"} )
+    Submit = SubmitField("Create")
