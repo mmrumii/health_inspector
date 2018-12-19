@@ -1,5 +1,3 @@
-# Nowroz
-
 import os
 import sys
 from sqlalchemy import Column, ForeignKey, Integer, String
@@ -36,7 +34,13 @@ class Service(Base):
     Phone = Column(String(20), nullable=True)
 
 
+class Comment(Base):
+    __tablename__ = 'Comment'
 
+    CommentID = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
+    CommentText = Column(String(500), nullable=False)
+    UserIDNumber = Column(Integer,ForeignKey(Users.UserIDNumber))
+    Users = relationship(Users)
 
 
 #Always stay at the end of the file

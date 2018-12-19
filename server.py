@@ -78,8 +78,6 @@ def register():
     return render_template('register.html', RegForm=RegForm)
 
 
-
-
 # User Login System
 @app.route('/login', methods=['GET','POST'])
 def login():
@@ -111,12 +109,18 @@ def dashboard():
 
 # Needs to commit
 # HOMEPAGE
-@app.route('/', methods=['GET','POST'])
+@app.route('/')
 def home():
     form = SearchForm(request.form)
-    if request.method == 'POST' and form.validate():
-        return render_template('search_result.html')
     return render_template('index.html', form = form)
+
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    form = SearchForm(request.form)
+    if request.method == 'POST' and form.validate():
+        results = session.query(Service).filter_by(ServiceName=form.service.data, Location=form.location.data).all()
+        return render_template('search_result.html',results=results)
+
 
 @app.route('/')
 def about():
