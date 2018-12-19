@@ -31,9 +31,7 @@ When user search a service, the website provides results based on
 
 <p>After installing all the dependencies , open the terminal go to the project directory</p>
 
-<p>e.g:</p>
-
-<code>cd Desktop/health_inspector</code>
+<p>e.g:</p><code>cd Desktop/health_inspector</code>
 
 Then, run the server.py using python
 
