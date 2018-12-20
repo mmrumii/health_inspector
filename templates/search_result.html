@@ -6,8 +6,16 @@
     <div class="row">
       <div class="col-2"></div>
       <div class="col-8">
-        <h2>We found 23 hospitals near you </h2>
-
+        <h2>We found hospitals near you </h2>
+        <ul>
+          {% for result in results %}
+          <li>{{ result.HospitalName }}</li>
+          <li>{{ result.ServiceName }}</li>
+          <li>{{ result.Location }}</li>
+          <li>{{ result.DetailsLocation }}</li>
+          <li>{{ result.Phone }}</li>
+          {% endfor %}
+        </ul>
       </div>
       <div class="col-2"></div>
     </div>
