@@ -15,7 +15,7 @@ When user search a service, the website provides results based on
 
 <p><strong>System requirements :</strong></p>
 <ul>
-  <li>Python 3.7+ installed</li>
+  <li>Python 2.7 or above version installed</li>
   <li>pip (python3) installed</li>
 </ul>
 
