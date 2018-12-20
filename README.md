@@ -1,7 +1,7 @@
 # health_inspector
-A website to help people finding medical services like Hospital, Farmarcy, Diagonstic center etc.
+A website to help people finding medical services like Hospitals, Pharmacy, Diagonstic centers etc.
 
-When user seach a service, the website provides results based on 
+When user search a service, the website provides results based on 
 <ul>
   <li>Location</li>
   <li>Price</li>
@@ -15,7 +15,7 @@ When user seach a service, the website provides results based on
 
 <p><strong>System requirements :</strong></p>
 <ul>
-  <li>Python 3.7+ installed</li>
+  <li>Python 2.7 or above version installed</li>
   <li>pip (python3) installed</li>
 </ul>
 
@@ -28,3 +28,19 @@ When user seach a service, the website provides results based on
 <code>pip install wtforms</code><br>
 <code>pip install flask_wtf</code><br>
 <code>pip install werkzeug.security</code><br>
+
+<p>After installing all the dependencies , open the terminal go to the project directory</p>
+
+<p>e.g:</p>
+
+<code>cd Desktop/health_inspector</code>
+
+<p>Then, run the server.py using python</p>
+
+<code>python server.py</code>
+
+<p>If the script run correctly, go to browser and visit </p>
+
+<a href="localhost:5000">localhost:5000</a>
+
+Now you would be able to browse the website on your browser.
