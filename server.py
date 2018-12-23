@@ -119,9 +119,10 @@ def home():
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     form = SearchForm(request.form)
-    if request.method == 'POST' and form.validate():
-        # results = session.query(Service).filter_by(ServiceName=form.service.data, Location=form.location.data).all()
+    if request.method == 'POST':
+        results = session.query(Service).filter_by(ServiceName=form.service.data, Location=form.location.data).all()
         return render_template('search_result.html',results=results)
+    else: return 'Something wrong'
 
 
 
