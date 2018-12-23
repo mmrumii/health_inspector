@@ -162,6 +162,11 @@ def new_service():
         return redirect(url_for('home'))
 
 
+@app.route('/add_comment', methods=['GET', 'POST'])
+@login_required
+def add_comment():
+    form = CommentForm()
+    return render_template('add_comment.html' form = form)
 
 #============================
 # Main Function
