@@ -5,17 +5,22 @@
   <div class="container">
     <div class="row">
       <div class="col-2"></div>
-      <div class="col-8">
-        <h2>We found hospitals near you </h2>
-        <ul>
+      <div class="col-8 py-5">
+        <h2>We found {{res_count}} hospitals near you </h2>
+
           {% for result in results %}
-          <li>{{ result.HospitalName }}</li>
-          <li>{{ result.ServiceName }}</li>
-          <li>{{ result.Location }}</li>
-          <li>{{ result.DetailsLocation }}</li>
-          <li>{{ result.Phone }}</li>
+
+            <div class="row my-3">
+              <div class="col bg-info">
+                <h2>{{ result.HospitalName }}</h2>
+                <h5>{{ result.ServiceName }}</h5>
+                <p><strong>Location : </strong>{{ result.Location }} | <strong>Phone : </strong>{{ result.Phone }}</p>
+                <p><strong>Address : </strong>{{ result.DetailsLocation }}</p>
+              </div>
+            </div>
+
           {% endfor %}
-        </ul>
+
       </div>
       <div class="col-2"></div>
     </div>

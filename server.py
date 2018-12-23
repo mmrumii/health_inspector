@@ -121,7 +121,8 @@ def search():
     form = SearchForm(request.form)
     if request.method == 'POST':
         results = session.query(Service).filter_by(ServiceName=form.service.data, Location=form.location.data).all()
-        return render_template('search_result.html',results=results)
+        res_count = len(results)
+        return render_template('search_result.html',results=results, res_count = res_count)
     else: return 'Something wrong'
 
 
