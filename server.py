@@ -107,6 +107,8 @@ def dashboard():
         return render_template('s_provider_dashboard.html')
     else: return redirect(url_for('home'))
 
+
+
 # Needs to commit
 # HOMEPAGE
 @app.route('/')
@@ -116,14 +118,17 @@ def home():
     form.service.choices = [(srv.ServiceName, srv.ServiceName) for srv in session.query(Service).all()]
     return render_template('index.html', form = form)
 
+
+
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     form = SearchForm(request.form)
     if request.method == 'POST':
         results = session.query(Service).filter_by(ServiceName=form.service.data, Location=form.location.data).all()
         res_count = len(results)
-        return render_template('search_result.html',results=results, res_count = res_count)
-    else: return 'Something wrong'
+        comment_form = CommentForm()
+        return render_template('search_result.html',results=results, res_count = res_count, comment_form=comment_form)
+    else: return redirect(url_for('home'))
 
 
 
@@ -162,11 +167,17 @@ def new_service():
         return redirect(url_for('home'))
 
 
+
 @app.route('/add_comment', methods=['GET', 'POST'])
 @login_required
 def add_comment():
-    form = CommentForm()
-    return render_template('add_comment.html' form = form)
+    form = CommentForm(request.form)
+    if request.method == 'POST':
+        return form.comment_text.data
+
+    else: return render_template('add_comment.html', form = form)
+
+
 
 #============================
 # Main Function
