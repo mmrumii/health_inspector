@@ -1,14 +1,10 @@
 <section class="bg-dark">
 
         <nav class="navbar container navbar-expand-lg navbar-dark bg-dark">
-          <a class="navbar-brand fnt_pattaya" href="{{url_for('home')}}">Health Inspector</a>
+          <a class="navbar-brand fnt_pattaya" href="{{url_for('home')}}">HealthInspector</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-<div class="center" style="position:absolute;
-                           left:50%;
-                           transform: translateX(-50%);
-                           -webkit-transform: translateX(-50%);" >
           <div class="collapse navbar-collapse mr-right" id="navbarSupportedContent">
             <ul class="navbar-nav mr-right">
               <li class="nav-item active">
@@ -26,15 +22,14 @@
                 <a class="nav-link" href="{{url_for('register')}}">Sign Up <span class="sr-only">(current)</span></a>
               </li>
               {% endif %}
-              <li class="nav-item active">
-                <a class="nav-link" href="{{url_for('about')}}">About us<span class="sr-only">(current)</span></a>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('about')}}">About us</a>
               </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="{{url_for('contact')}}">Contact us<span class="sr-only">(current)</span></a>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('contact')}}">Contact us</a>
               </li>
             </ul>
           </div>
-</div>
         </nav>
 
 </section>
