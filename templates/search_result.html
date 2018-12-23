@@ -16,12 +16,13 @@
                 <h5>{{ result.ServiceName }}</h5>
                 <p><strong>Location : </strong>{{ result.Location }} | <strong>Phone : </strong>{{ result.Phone }}</p>
                 <p><strong>Address : </strong>{{ result.DetailsLocation }}</p>
-                <p>{% if current_user.is_authenticated %}
-                  <a href="#">Write a Comment</a>
-                {% endif %}
+                {% if current_user.is_authenticated %}
+                  <a href="{{url_for('add_comment')}}">Write a comment</a>
                   |
+                {% endif %}
+
                 <a href="#">View comments</a>
-                </p>
+
               </div>
             </div>
 
