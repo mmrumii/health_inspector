@@ -167,16 +167,29 @@ def new_service():
         return redirect(url_for('home'))
 
 
+@app.route('/comments')
+def comments(service_id):
+    cmnts = session.query(Comment).filter_by()
 
-@app.route('/add_comment', methods=['GET', 'POST'])
+
+@app.route('/create_comment', methods=['GET', 'POST'])
 @login_required
-def add_comment():
+def create_comment():
     form = CommentForm(request.form)
     if request.method == 'POST':
-        return form.comment_text.data
+        new_comment = Comment(CommentText=form.comment_text.data, UserIDNumber=current_user.UserIDNumber, ServiceID = request.args.get('service_id'))
+        session.add(new_comment)
+        session.commit()
+        flash("Successfully created")
+        return redirect(url_for('home'))
 
     else: return render_template('add_comment.html', form = form)
 
+@app.route('/add_comment/<int:service_id>')
+@login_required
+def show_comment_form(service_id):
+    form = CommentForm(request.form)
+    return render_template('add_comment.html', form = form, service_id = service_id)
 
 
 #============================

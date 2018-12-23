@@ -17,7 +17,7 @@
                 <p><strong>Location : </strong>{{ result.Location }} | <strong>Phone : </strong>{{ result.Phone }}</p>
                 <p><strong>Address : </strong>{{ result.DetailsLocation }}</p>
                 {% if current_user.is_authenticated %}
-                  <a href="{{url_for('add_comment')}}">Write a comment</a>
+                  <a href="{{url_for('show_comment_form', service_id= result.ServiceID )}}">Write a comment</a>
                   |
                 {% endif %}
 

@@ -39,8 +39,11 @@ class Comment(Base):
 
     CommentID = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
     CommentText = Column(String(500), nullable=False)
+    ServiceID = Column(Integer, ForeignKey(Service.ServiceID))
+    Service = relationship(Service)
     UserIDNumber = Column(Integer,ForeignKey(Users.UserIDNumber))
     Users = relationship(Users)
+
 
 
 #Always stay at the end of the file
