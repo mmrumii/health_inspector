@@ -13,8 +13,8 @@ class ServiceForm(Form):
 
 
 class SearchForm(Form):
-    location = SelectField("", [validators.DataRequired()], choices=[('Bashundhara','Bashundhara'),('Uttara','Uttara')])
-    service = SelectField("", [validators.DataRequired()], choices=[('MRI','MRI'),('X-Ray','X-Ray')])
+    location = SelectField("", [validators.DataRequired()], choices=[])
+    service = SelectField("", [validators.DataRequired()], choices=[])
     Submit = SubmitField("Search")
 
 

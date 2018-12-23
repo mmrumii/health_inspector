@@ -112,14 +112,17 @@ def dashboard():
 @app.route('/')
 def home():
     form = SearchForm(request.form)
+    form.location.choices = [(srv.Location, srv.Location)for srv in session.query(Service).all()]
+    form.service.choices = [(srv.ServiceName, srv.ServiceName) for srv in session.query(Service).all()]
     return render_template('index.html', form = form)
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     form = SearchForm(request.form)
     if request.method == 'POST' and form.validate():
-        results = session.query(Service).filter_by(ServiceName=form.service.data, Location=form.location.data).all()
+        # results = session.query(Service).filter_by(ServiceName=form.service.data, Location=form.location.data).all()
         return render_template('search_result.html',results=results)
+
 
 
 @app.route('/')
