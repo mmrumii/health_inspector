@@ -1,90 +1,33 @@
-{% endblock%}
 {% extends 'base.html' %}
 {% block content %}
 
-<section>
-    <div class="container"></div>
-    <div class="row">
-      <div class="col-8">
-        <h3>Service Details</h3>
+<section class="bg-success text-white">
+  <div class="container">
+    <div class="col-3"></div>
+    <div class="col-6 py-5">
+      <h2>{{ srv.HospitalName }}</h2>
+      <h5>{{ srv.ServiceName }} ,  <strong>Price : </strong>{{srv.Price}}</h5>
+      <p><strong>Location : </strong>{{ srv.Location }} | <strong>Phone : </strong>{{ srv.Phone }}</p>
+      <p><strong>Address : </strong>{{ srv.DetailsLocation }}</p>
+    </div>
+  </div>
+</section>
+<section class="py-5">
+  <div class="container">
+    <h2>Comments </h2>
+    <p class="small">{{cmnt_count}} People talked about this service</p>
+    {% for comment in cmnts %}
+    <div class="row mb-3">
+      <div class="col-1 ">
+        <img class="img-fluid" src="{{url_for('static', filename='images/user.png')}}" alt="">
       </div>
-      <div class="col-4">
-        <h3>Sidebar </h3>
+      <div class="col-4 bg-warning rounded py-3">
+        {{comment.CommentText}}
       </div>
     </div>
-    <div class="row">
-      <div class="col-6">
-        <h3>Add comment</h3>
-        <<form>
-          <fieldset class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-            <small class="text-muted">We'll never share your email with anyone else.</small>
-          </fieldset>
-          <fieldset class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-          </fieldset>
-          <fieldset class="form-group">
-            <label for="exampleSelect1">Example select</label>
-            <select class="form-control" id="exampleSelect1">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select>
-          </fieldset>
-          <fieldset class="form-group">
-            <label for="exampleSelect2">Example multiple select</label>
-            <select multiple class="form-control" id="exampleSelect2">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select>
-          </fieldset>
-          <fieldset class="form-group">
-            <label for="exampleTextarea">Example textarea</label>
-            <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
-          </fieldset>
-          <fieldset class="form-group">
-            <label for="exampleInputFile">File input</label>
-            <input type="file" class="form-control-file" id="exampleInputFile">
-            <small class="text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
-          </fieldset>
-          <div class="radio">
-            <label>
-              <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-              Option one is this and that&mdash;be sure to include why it's great
-            </label>
-          </div>
-          <div class="radio">
-            <label>
-              <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-              Option two can be something else and selecting it will deselect option one
-            </label>
-          </div>
-          <div class="radio disabled">
-            <label>
-              <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled>
-              Option three is disabled
-            </label>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox"> Check me out
-            </label>
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-      </div>
-      <div class="col-6">
-        <h3>Comments</h3>
-      </div>
-    </div>
+
+    {% endfor %}
+  </div>
 </section>
 
-
-{% endblock%}
+{% endblock %}

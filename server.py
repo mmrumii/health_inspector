@@ -167,9 +167,12 @@ def new_service():
         return redirect(url_for('home'))
 
 
-@app.route('/comments')
+@app.route('/comments/<int:service_id>')
 def comments(service_id):
-    cmnts = session.query(Comment).filter_by()
+    cmnts = session.query(Comment).filter_by(ServiceID=service_id).all()
+    srv = session.query(Service).filter_by(ServiceID=service_id).first()
+    cmnt_count = len(cmnts)
+    return render_template('service_details.html', cmnts = cmnts, srv = srv, cmnt_count=cmnt_count)
 
 
 @app.route('/create_comment', methods=['GET', 'POST'])
