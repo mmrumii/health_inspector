@@ -40,11 +40,13 @@ login_manager.init_app(app)
 login_manager.login_view = 'login'
 ######################################
 
-
+# Integration with the flask login
+# A flowless connection between
+# User Model and Flask Login
 @login_manager.user_loader
 def load_user(user_id):
-    userId = session.query(Users).filter_by(UserIDNumber = int(user_id)).first()
-    return userId
+    user = session.query(Users).filter_by(UserIDNumber = int(user_id)).first()
+    return user
 
 
 # Log out
@@ -61,6 +63,8 @@ def reset_password():
 
 
 # User Registration System
+# Recieves all the datas from the
+# sign up form and then store in the database
 @app.route('/register',  methods=['GET','POST'])
 def register():
 
@@ -79,6 +83,10 @@ def register():
 
 
 # User Login System
+# Recieves datas from login form and
+# If datas matche with database datas,
+# It complete the login process
+# and redirect to dashboard.
 @app.route('/login', methods=['GET','POST'])
 def login():
     if current_user.is_authenticated:
@@ -96,8 +104,10 @@ def login():
 
     return render_template('login.html', LoginForm = loginForm)
 
-
-# General User Dashboard
+# First it checks the login user type,
+# then redirect to specific dashboard page
+# IF user_type = 'customer' then rediect to  "customer_dashboard" template
+# IF user_type = 's_provider' then rediect to  "s_provider_dashboard" template
 @app.route('/dashboard')
 @login_required
 def dashboard():
@@ -109,9 +119,8 @@ def dashboard():
     else: return redirect(url_for('home'))
 
 
-
-# Needs to commit
 # HOMEPAGE
+# This controller reponse user the index.html template file
 @app.route('/')
 def home():
     form = SearchForm(request.form)
@@ -120,7 +129,9 @@ def home():
     return render_template('index.html', form = form)
 
 
-
+# Recieves data from home page search form
+# Process the query and gather search result .
+# sends those datas to search_result template
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     form = SearchForm(request.form)
@@ -132,25 +143,29 @@ def search():
     else: return redirect(url_for('home'))
 
 
-
+# Response with about_us template which contains
+# Development team information.
 @app.route('/about')
 def about():
     return render_template('about_us.html')
 
-
+# Response with contact template which
+# contains Contact form..
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
 
-
+# Helper function which helps to
+# identify the user type
 def is_s_provider(current_user):
     if current_user.UserType == 'S_provider':
         return True
     else: return False
 
 
-# Needs to commit
-
+# Recieves the data from create new service from,
+# checks if the service already exist or not and finally
+# strore into database.
 @app.route('/new_service', methods=['GET','POST'])
 @login_required
 def new_service():
@@ -167,7 +182,7 @@ def new_service():
     else:
         return redirect(url_for('home'))
 
-
+# Displays service details page
 @app.route('/comments/<int:service_id>')
 def comments(service_id):
     form = CommentForm()
@@ -176,7 +191,9 @@ def comments(service_id):
     cmnt_count = len(cmnts)
     return render_template('service_details.html', cmnts = cmnts, srv = srv, cmnt_count=cmnt_count,form=form)
 
-
+# Recieves data from comment form
+# then store into database only
+# if it is not alreadt stored in databse.
 @app.route('/create_comment', methods=['GET', 'POST'])
 @login_required
 def create_comment():
@@ -196,8 +213,8 @@ def create_comment():
     else: return render_template('add_comment.html', form = form)
 
 
-
-
+# Displays the comment from
+# after a button action.
 @app.route('/add_comment/<int:service_id>')
 @login_required
 def show_comment_form(service_id):
