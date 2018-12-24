@@ -104,7 +104,8 @@ def dashboard():
     if current_user.UserType == 'Customer':
         return render_template('customer_dashboard.html')
     elif current_user.UserType == 'S_provider':
-        return render_template('s_provider_dashboard.html')
+        services = session.query(Service).filter_by(ServiceOwner=current_user.UserIDNumber).all()
+        return render_template('s_provider_dashboard.html', services=services)
     else: return redirect(url_for('home'))
 
 
@@ -132,9 +133,9 @@ def search():
 
 
 
-@app.route('/')
+@app.route('/about')
 def about():
-    return render_template('about.html')
+    return render_template('about_us.html')
 
 
 @app.route('/contact')
@@ -156,7 +157,7 @@ def new_service():
     if is_s_provider(current_user):
         form = ServiceForm(request.form)
         if request.method == 'POST' and form.validate():
-            serv = Service(ServiceName=form.ServiceName.data, Location=form.Location.data, DetailsLocation=form.DetailsLocation.data, HospitalName=form.HospitalName.data, Price=form.Price.data, Phone=form.Phone.data)
+            serv = Service(ServiceName=form.ServiceName.data, Location=form.Location.data, DetailsLocation=form.DetailsLocation.data, HospitalName=form.HospitalName.data, Price=form.Price.data, Phone=form.Phone.data, ServiceOwner=current_user.UserIDNumber)
             session.add(serv)
             session.commit()
             flash('Service Successfully added!')
@@ -169,10 +170,11 @@ def new_service():
 
 @app.route('/comments/<int:service_id>')
 def comments(service_id):
+    form = CommentForm()
     cmnts = session.query(Comment).filter_by(ServiceID=service_id).all()
     srv = session.query(Service).filter_by(ServiceID=service_id).first()
     cmnt_count = len(cmnts)
-    return render_template('service_details.html', cmnts = cmnts, srv = srv, cmnt_count=cmnt_count)
+    return render_template('service_details.html', cmnts = cmnts, srv = srv, cmnt_count=cmnt_count,form=form)
 
 
 @app.route('/create_comment', methods=['GET', 'POST'])
@@ -183,13 +185,13 @@ def create_comment():
         check_comment = session.query(Comment).filter_by(UserIDNumber = current_user.UserIDNumber, ServiceID = request.form.get('service_id')).first()
         if check_comment:
             flash('You already have written a comment earlier.')
-            return redirect(url_for('home'))
+            return redirect(url_for('comments',service_id = request.form.get('service_id') ))
         else:
             new_comment = Comment(CommentText=form.comment_text.data, UserIDNumber=current_user.UserIDNumber, ServiceID = request.form.get('service_id'))
             session.add(new_comment)
             session.commit()
             flash("Successfully created")
-            return redirect(url_for('home'))
+            return redirect(url_for('comments',service_id = request.form.get('service_id') ))
 
     else: return render_template('add_comment.html', form = form)
 

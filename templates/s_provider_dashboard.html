@@ -17,6 +17,11 @@
             </div>
             <div class="col-6">
                 <a href="{{ url_for('new_service') }}">Add new service</a>
+                <ol class="my-3">
+                {% for srv in services %}
+                  <li><a href="{{url_for('comments', service_id = srv.ServiceID)}}">{{srv.ServiceName}}</li></a>
+                {% endfor %}
+                </ol>
             </div>
         </div>
     </div>

@@ -4,15 +4,15 @@
 <section class="bg-success text-white">
   <div class="container">
     <div class="col-3"></div>
-    <div class="col-6 py-5">
-      <h2>{{ srv.HospitalName }}</h2>
+    <div class="col-6 py-5 fnt_opensans">
+      <h3 class="fnt_opensans">{{ srv.HospitalName }}</h3>
       <h5>{{ srv.ServiceName }} ,  <strong>Price : </strong>{{srv.Price}}</h5>
       <p><strong>Location : </strong>{{ srv.Location }} | <strong>Phone : </strong>{{ srv.Phone }}</p>
       <p><strong>Address : </strong>{{ srv.DetailsLocation }}</p>
     </div>
   </div>
 </section>
-<section class="py-5">
+<section class="py-5 fnt_ptsans">
   <div class="container">
     <h2>Comments </h2>
     <p class="small">{{cmnt_count}} People talked about this service</p>
@@ -23,11 +23,30 @@
       </div>
       <div class="col-4 bg-warning rounded py-3">
         {{comment.CommentText}}
+
       </div>
     </div>
 
     {% endfor %}
+    <div class="row mb-3">
+      <div class="col-1 ">
+        <img class="img-fluid" src="{{url_for('static', filename='images/user.png')}}" alt="">
+      </div>
+      <div class="col-4 bg-warning rounded py-3">
+        <form action="{{url_for('create_comment')}}" method="post">
+          <input type="number" name="service_id" value="{{ srv.ServiceID }}" hidden>
+          <p class="py-2"><strong>What do you think about this service?</strong>
+            <div class="form-group">
+
+                {{form.comment_text(class="form-control")}}
+            </div>
+            {{form.Submit(class="btn btn-primary")}}
+        </form>
+
+      </div>
+    </div>
   </div>
 </section>
+
 
 {% endblock %}

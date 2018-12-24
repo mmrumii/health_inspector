@@ -32,6 +32,8 @@ class Service(Base):
     HospitalName = Column(String(100), nullable=False)
     Price = Column(Integer, nullable=True)
     Phone = Column(String(20), nullable=True)
+    ServiceOwner = Column(Integer, ForeignKey(Users.UserIDNumber))
+    Users = relationship(Users)
 
 
 class Comment(Base):

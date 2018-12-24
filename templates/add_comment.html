@@ -9,10 +9,10 @@
             <form action="{{url_for('create_comment')}}" method="post">
               <input type="number" name="service_id" value="{{ service_id }}" hidden>
                 <div class="form-group">
-                    <label for="exampleFormControlTextarea1">What do you think about this service?</label>
+                    <h2>What do you think about this service?</h2>
                     {{form.comment_text(class="form-control")}}
                 </div>
-                {{form.Submit}}
+                {{form.Submit(class="btn btn-primary")}}
             </form>
           </div>
         </div>

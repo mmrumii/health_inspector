@@ -6,14 +6,14 @@
     <div class="row">
       <div class="col-2"></div>
       <div class="col-8 py-5">
-        <h2>We found {{res_count}} hospitals near you </h2>
+        <h2 class="fnt_ptsans">We found {{res_count}} hospitals near you </h2>
 
           {% for result in results %}
 
-            <div class="row my-3">
-              <div class="col bg-light">
-                <h2>{{ result.HospitalName }}</h2>
-                <h5>{{ result.ServiceName }}</h5>
+            <div class="row my-3 py-3 fnt_ptsans">
+              <div class="col bg-light py-3">
+                <a class="fnt_opensans" href="{{url_for('comments', service_id =result.ServiceID)}}"><h3>{{ result.HospitalName }}</h3></a>
+                <h5 class="fnt_opensans">{{ result.ServiceName }} , <strong>Price : </strong>{{result.Price}}</h5>
                 <p><strong>Location : </strong>{{ result.Location }} | <strong>Phone : </strong>{{ result.Phone }}</p>
                 <p><strong>Address : </strong>{{ result.DetailsLocation }}</p>
                 {% if current_user.is_authenticated %}
