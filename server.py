@@ -177,13 +177,21 @@ def comments(service_id):
 def create_comment():
     form = CommentForm(request.form)
     if request.method == 'POST':
-        new_comment = Comment(CommentText=form.comment_text.data, UserIDNumber=current_user.UserIDNumber, ServiceID = request.args.get('service_id'))
-        session.add(new_comment)
-        session.commit()
-        flash("Successfully created")
-        return redirect(url_for('home'))
+        check_comment = session.query(Comment).filter_by(UserIDNumber = current_user.UserIDNumber, ServiceID = request.form.get('service_id')).first()
+        if check_comment:
+            flash('You already have written a comment earlier.')
+            return redirect(url_for('home'))
+        else:
+            new_comment = Comment(CommentText=form.comment_text.data, UserIDNumber=current_user.UserIDNumber, ServiceID = request.form.get('service_id'))
+            session.add(new_comment)
+            session.commit()
+            flash("Successfully created")
+            return redirect(url_for('home'))
 
     else: return render_template('add_comment.html', form = form)
+
+
+
 
 @app.route('/add_comment/<int:service_id>')
 @login_required

@@ -5,9 +5,9 @@
     <div class="container">
         <div class="row">
             <div class="col-3"></div>
-          <div class="col-6">
+          <div class="col-6 py-5">
             <form action="{{url_for('create_comment')}}" method="post">
-              <input type="number" name="service_id" value="{{service_id}}" hidden>
+              <input type="number" name="service_id" value="{{ service_id }}" hidden>
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">What do you think about this service?</label>
                     {{form.comment_text(class="form-control")}}
